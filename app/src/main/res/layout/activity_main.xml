@@ -14,6 +14,7 @@
             android:id="@+id/button_start_find"
             android:background="@drawable/rectangle_button"
             style="@style/Widget.AppCompat.Button.Borderless"
+            android:colorButtonNormal="#ffffff"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
