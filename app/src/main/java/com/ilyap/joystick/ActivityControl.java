@@ -20,13 +20,11 @@ public class ActivityControl extends AppCompatActivity {
         ConnectedThread threadCommand = new ConnectedThread(MainActivity.clientSocket);
         threadCommand.start();
 
-
         ImageButton btnForward = findViewById(R.id.button_forward);
         ImageButton btnBackward = findViewById(R.id.button_backward);
         ImageButton btnLeft = findViewById(R.id.button_left);
         ImageButton btnRight = findViewById(R.id.button_right);
         ImageButton btnStop = findViewById(R.id.button_stop);
-
 
         btnForward.setOnClickListener(view -> threadCommand.sendCommand("f"));
         btnBackward.setOnClickListener(view -> threadCommand.sendCommand("b"));

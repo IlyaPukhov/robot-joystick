@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
     <ImageButton
             android:layout_width="120dp"
@@ -21,7 +20,7 @@
             android:contentDescription="@string/stop"
             android:background="@drawable/stop_button"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true" />
 
     <ImageButton
             android:layout_width="120dp"
