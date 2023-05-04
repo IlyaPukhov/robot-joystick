@@ -48,20 +48,18 @@ public class MainActivity extends AppCompatActivity {
         Button buttonStartFind = findViewById(R.id.button_start_find);
         listView = findViewById(R.id.list_device);
         buttonStartFind.setOnClickListener(v -> {
-            if (permissionGranted()) {
-                bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                checkBluetoothEnabled();
-            }
+            permissionGranting();
+            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            checkBluetoothEnabled();
         });
     }
 
-    private boolean permissionGranted() {
+    private void permissionGranting() {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 2);
             }
         }
-        return true;
     }
 
     @SuppressLint("MissingPermission")

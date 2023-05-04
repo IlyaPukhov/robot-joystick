@@ -12,7 +12,7 @@
             android:layout_marginTop="40dp"
             android:text="@string/start_search"
             android:id="@+id/button_start_find"
-            android:background="@drawable/button_rectangle"
+            android:background="@drawable/rectangle_button"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />

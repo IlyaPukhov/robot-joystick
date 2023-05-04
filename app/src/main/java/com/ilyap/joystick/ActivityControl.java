@@ -2,8 +2,6 @@ package com.ilyap.joystick;
 
 import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +20,7 @@ public class ActivityControl extends AppCompatActivity {
         ConnectedThread threadCommand = new ConnectedThread(MainActivity.clientSocket);
         threadCommand.start();
 
-        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
+
         ImageButton btnForward = findViewById(R.id.button_forward);
         ImageButton btnBackward = findViewById(R.id.button_backward);
         ImageButton btnLeft = findViewById(R.id.button_left);
@@ -30,26 +28,11 @@ public class ActivityControl extends AppCompatActivity {
         ImageButton btnStop = findViewById(R.id.button_stop);
 
 
-        btnForward.setOnClickListener(view -> {
-            view.startAnimation(animAlpha);
-            threadCommand.sendCommand("f");
-        });
-        btnBackward.setOnClickListener(view -> {
-            view.startAnimation(animAlpha);
-            threadCommand.sendCommand("b");
-        });
-        btnLeft.setOnClickListener(view -> {
-            view.startAnimation(animAlpha);
-            threadCommand.sendCommand("l");
-        });
-        btnRight.setOnClickListener(view -> {
-            view.startAnimation(animAlpha);
-            threadCommand.sendCommand("r");
-        });
-        btnStop.setOnClickListener(view -> {
-            view.startAnimation(animAlpha);
-            threadCommand.sendCommand("s");
-        });
+        btnForward.setOnClickListener(view -> threadCommand.sendCommand("f"));
+        btnBackward.setOnClickListener(view -> threadCommand.sendCommand("b"));
+        btnLeft.setOnClickListener(view -> threadCommand.sendCommand("l"));
+        btnRight.setOnClickListener(view -> threadCommand.sendCommand("r"));
+        btnStop.setOnClickListener(view -> threadCommand.sendCommand("s"));
     }
 
     private static class ConnectedThread extends Thread {
