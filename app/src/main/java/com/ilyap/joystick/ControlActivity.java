@@ -48,9 +48,9 @@ public class ControlActivity extends AppCompatActivity {
         public void sendCommand(String command) {
             String fullCommand = command;
 
-            if (command.equals("f") || command.equals("b")) {
+            if (command.equals("f") || command.equals("b") || command.contains("s")) {
                 lastVerticalCommand = command;
-            } else if (command.equals("l") || command.equals("r")) {
+            } else {
                 fullCommand += lastVerticalCommand;
             }
 
