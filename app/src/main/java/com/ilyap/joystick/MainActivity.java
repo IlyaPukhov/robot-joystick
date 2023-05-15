@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayList<String> pairedDeviceArrayList;
     public static BluetoothSocket clientSocket;
+    public static String clientName;
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     private final ActivityResultLauncher<Intent> btActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("MissingPermission")
     private void checkBluetoothEnabled() {
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -78,14 +78,14 @@ public class MainActivity extends AppCompatActivity {
         if (pairedDevice.size() > 0) {
             pairedDeviceArrayList = new ArrayList<>();
             for (BluetoothDevice device : pairedDevice) {
-                pairedDeviceArrayList.add(device.getAddress() + "/" + device.getName());
+                pairedDeviceArrayList.add(device.getAddress() + " " + device.getName());
             }
         }
 
         ArrayAdapter<String> pairedDeviceAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.item_device, R.id.item_device_textView, pairedDeviceArrayList);
         listView.setAdapter(pairedDeviceAdapter);
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            final String itemMAC = listView.getItemAtPosition(i).toString().split("/", 2)[0];
+            final String itemMAC = listView.getItemAtPosition(i).toString().split(" ", 2)[0];
 
             executorService.submit(() -> {
                 BluetoothDevice device = bluetoothAdapter.getRemoteDevice(itemMAC);
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     socket.connect();
                     if (socket.isConnected()) {
                         clientSocket = socket;
+                        clientName = device.getName();
                         Intent intent = new Intent();
                         intent.setClass(getApplicationContext(), ControlActivity.class);
                         startActivity(intent);
