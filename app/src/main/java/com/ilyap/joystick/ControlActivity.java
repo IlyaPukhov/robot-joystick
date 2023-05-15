@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-public class ActivityControl extends AppCompatActivity {
+public class ControlActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class ActivityControl extends AppCompatActivity {
     }
 
     private static class ConnectedThread extends Thread {
+        private String lastVerticalCommand;
         private final OutputStream outputStream;
 
         public ConnectedThread(BluetoothSocket btSocket) {
@@ -45,8 +46,16 @@ public class ActivityControl extends AppCompatActivity {
         }
 
         public void sendCommand(String command) {
+            String fullCommand = command;
+
+            if (command.equals("f") || command.equals("b")) {
+                lastVerticalCommand = command;
+            } else {
+                fullCommand += lastVerticalCommand;
+            }
+
             try {
-                outputStream.write(command.getBytes(StandardCharsets.UTF_8));
+                outputStream.write(fullCommand.getBytes(StandardCharsets.UTF_8));
                 outputStream.flush();
             } catch (IOException e) {
                 throw new RuntimeException(e);

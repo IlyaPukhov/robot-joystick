@@ -1,6 +1,5 @@
 #include <L298NX2.h>
 #include <Ultrasonic.h>
-#include <SoftwareSerial.h>
 
 #define PIN_ENA 3  // Вывод управления скоростью вращения мотора №1
 #define PIN_ENB 2  // Вывод управления скоростью вращения мотора №2
@@ -11,12 +10,9 @@
 int tonePin = 11;
 int trigPin = 9;
 int echoPin = 10;
-int rxPin = 1;
-int txPin = 0;
-SoftwareSerial BTSerial(rxPin, txPin);
 
 long duration, distance;
-char val;
+int val;
 
 
 void setup() {
@@ -41,15 +37,14 @@ void setup() {
   // Установка для пьезоэлемента
   pinMode(tonePin, OUTPUT);
 
-  BTSerial.begin(38400);
   Serial.begin(9600);
 }
 
 void loop() {
 
   // Управление моторами и командами направления движения
-  if (BTSerial.available() > 0) {
-    val = BTSerial.read();
+  if (Serial.available() > 0) {
+    val = Serial.read();
 
     // Команда вперед
     if (val == 'f') {

@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     if (socket.isConnected()) {
                         clientSocket = socket;
                         Intent intent = new Intent();
-                        intent.setClass(getApplicationContext(), ActivityControl.class);
+                        intent.setClass(getApplicationContext(), ControlActivity.class);
                         startActivity(intent);
                     }
                 } catch (IOException ignored) {
