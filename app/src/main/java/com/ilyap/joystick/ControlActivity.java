@@ -50,7 +50,7 @@ public class ControlActivity extends AppCompatActivity {
 
             if (command.equals("f") || command.equals("b")) {
                 lastVerticalCommand = command;
-            } else {
+            } else if (command.equals("l") || command.equals("r")) {
                 fullCommand += lastVerticalCommand;
             }
 
